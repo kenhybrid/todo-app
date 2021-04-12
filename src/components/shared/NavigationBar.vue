@@ -48,12 +48,12 @@
       </v-btn>
     </v-app-bar>
     <!-- search bar -->
-
-    <!-- side nav -->
-    <v-navigation-drawer app v-model="drawer" color="white">
-      <!-- <v-list class="top">
+ <!-- <v-list class="top">
         <v-img src="../../assets/wallpaper1.jpg"> </v-img>
       </v-list> -->
+    <!-- side nav -->
+    <v-navigation-drawer app v-model="drawer" color="white">
+     
       <!-- links -->
       <v-list class="top-2">
         <v-list-item
