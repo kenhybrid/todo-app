@@ -51,9 +51,9 @@
 
     <!-- side nav -->
     <v-navigation-drawer app v-model="drawer" color="white">
-      <v-list class="top">
+      <!-- <v-list class="top">
         <v-img src="../../assets/wallpaper1.jpg"> </v-img>
-      </v-list>
+      </v-list> -->
       <!-- links -->
       <v-list class="top-2">
         <v-list-item
@@ -133,6 +133,6 @@ export default {
 }
 
 .top-2 {
-  margin-top: -16px !important;
+  margin-top: -5px !important;
 }
 </style>
