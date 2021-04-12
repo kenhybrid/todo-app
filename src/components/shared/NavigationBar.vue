@@ -1,11 +1,12 @@
 <template>
   <nav>
     <v-app-bar
-      v-if="$route.name == 'Todo' || $route.name == 'Notes' "
+      v-if="$route.name == 'Todo' || $route.name == 'Notes'"
       app
       elevation-0
       dark
       prominent
+      fixed
       elevate-on-scroll
       src="../../assets/wallpaper2.jpg"
       height="180"
@@ -17,21 +18,37 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-if="!search"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
       <v-app-bar-title>
-        <Time/>
-
+        <Time v-if="!search" />
       </v-app-bar-title>
+      <v-container grid-list-xs>
+        <v-text-field
+          v-if="search"
+          outlined
+          autocomplete="off"
+          @click:append="close"
+          class="mt-1"
+          append-icon="mdi-close"
+          v-model="searchTerm"
+          @keyup="SearchTodos"
+          name="name"
+          label="search"
+          id="id"
+        ></v-text-field>
+      </v-container>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="search = !search">
+      <v-btn icon v-if="!search" @click="search = !search">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-
     </v-app-bar>
     <!-- search bar -->
-  
+
     <!-- side nav -->
     <v-navigation-drawer app v-model="drawer" color="white">
       <v-list class="top">
@@ -68,18 +85,19 @@
 </template>
 
 <script>
-import Time from "./Time"
+import Time from "./Time";
 export default {
-  components:{
-    Time
+  components: {
+    Time,
   },
   data() {
     return {
       drawer: false,
       search: false,
+      searchTerm: "",
       //   links
       links: [
-        { name: "Todos", link: "/", icon: "mdi-pencil-outline" },
+        { name: "Todos", link: "/", icon: "mdi-format-list-checks" },
         { name: "Notes", link: "/notes", icon: "mdi-book-outline" },
       ],
     };
@@ -90,8 +108,21 @@ export default {
     },
   },
   methods: {
+    SearchTodos() {
+      if (this.searchTerm != "") {
+        this.$store.commit("searcTodos", this.searchTerm);
+      } else {
+        this.$store.dispatch("getAllTodos");
+      }
+    },
     logout() {
       this.$store.dispatch("logOutUser");
+    },
+    close() {
+      this.search = false;
+      this.searchTerm = "";
+        this.$store.dispatch("getAllTodos");
+
     },
   },
 };

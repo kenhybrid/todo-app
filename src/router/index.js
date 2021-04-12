@@ -2,14 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import { auth } from "../plugins/firebase";
-// import store from "../store"
+import Todo from "../views/Todo.vue"
 
 const routes = [
   {
     path: "/",
     name: "Todo",
     meta: { requiresAuth: true },
-    component: () => import("../views/Todo.vue"),
+    component: Todo
   },
   {
     path: "/login",
@@ -37,6 +37,11 @@ const routes = [
     name: "Edit",
     meta: { requiresAuth: true },
     component: () => import("../components/todo/dialogs/UpdateTodo.vue"),
+  },{
+    path: "/create",
+    name: "CreateTodo",
+    meta: { requiresAuth: true },
+    component: () => import("../components/todo/dialogs/CreateTodo.vue"),
   },
 ];
 

@@ -1,20 +1,9 @@
 <template>
   <div>
-    <v-btn fab fixed bottom right class="primary" @click="dialog = true">
-      <v-icon small>
-        mdi-plus
-      </v-icon>
-    </v-btn>
-    <v-dialog
-      transition="dialog-bottom-transition"
-      fullscreen
-      hide-overlay
-      v-model="dialog"
-      max-width="500px"
-    >
-      <v-card tile class="pa-3">
+ 
+      <v-card tile flat class="pa-3">
         <v-app-bar elevation="0" color="white">
-          <v-btn icon dark @click="dialog = false">
+          <v-btn icon dark @click="()=>$router.go(-1)">
             <v-icon color="primary">mdi-arrow-left</v-icon>
           </v-btn>
           <v-subheader class="center">CREATE A TASK</v-subheader>
@@ -72,7 +61,6 @@
           <!-- <v-btn block color="primary" dark @click="addTodo">Add Todo</v-btn> -->
         </v-form>
       </v-card>
-    </v-dialog>
     <v-snackbar v-model="snackbar" bottom timeout="3000">
       <v-icon class="px-5" color="error">mdi-alert</v-icon>
       Please fill in all fields!
@@ -85,7 +73,6 @@ export default {
   data() {
     return {
       items: ["High", "Medium", "Low"],
-      dialog: false,
       modal: false,
       snackbar: false,
       date: "",
@@ -99,9 +86,9 @@ export default {
   methods: {
     addTodo() {
       if (
-        this.content != null &&
-        this.priority != null &&
-        this.dueDate != null
+        this.content != "" &&
+        this.priority != "" &&
+        this.dueDate != ""
       ) {
         this.$store
           .dispatch("createTodo", {
@@ -112,7 +99,6 @@ export default {
             priority: this.priority,
           })
           .then(() => {
-            this.dialog = false;
             this.content = "";
             this.priority = "";
             this.dueDate = "";

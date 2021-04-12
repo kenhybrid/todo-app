@@ -1,10 +1,6 @@
 <template>
   <div>
-    <!-- <v-toolbar dense app elevation="0">
-      <v-btn class="mx-2 High">High</v-btn>
-      <v-btn class="mx-2 Medium">Medium</v-btn>
-      <v-btn class="mx-2 Low">Low</v-btn>
-    </v-toolbar> -->
+  
     <v-container grid-list-xs class="mb-5 pb-5">
       <v-list subheader two-line v-if="todos.length > 0">
         <v-divider></v-divider>
@@ -17,7 +13,6 @@
               ></v-checkbox>
             </v-list-item-avatar>
             <v-list-item-content>
-              <!-- <v-list-item-title> pending </v-list-item-title> -->
               <v-list-item-title>{{ n.content }} .</v-list-item-title>
               <small
                 ><b>{{ n.createdAt | dateFilter }}</b></small
@@ -29,7 +24,7 @@
             <!--suplimentary action  -->
             <v-list-item-action>
               <!-- menu -->
-              <v-menu bottom close-on-click offset-x @input="onMenuToggle">
+              <v-menu bottom close-on-click offset-x>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn icon large dark v-bind="attrs" v-on="on">
                     <v-icon color="grey lighten-1">mdi-dots-vertical</v-icon>
@@ -48,25 +43,25 @@
                   <!-- view todo  end-->
 
                   <!-- update -->
-                    <v-list-item link router :to="'/edit/' + n.id">
-                      <v-list-item-icon>
-                        <v-icon>mdi-pencil-outline</v-icon>
-                      </v-list-item-icon>
-                      <v-list-item-content>
-                        <v-list-item-title>Edit</v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
+                  <v-list-item link router :to="'/edit/' + n.id">
+                    <v-list-item-icon>
+                      <v-icon>mdi-pencil-outline</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Edit</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
 
                   <!-- update end -->
                   <!-- schedule todo -->
-                    <v-list-item link>
-                      <v-list-item-icon>
-                        <v-icon>mdi-calendar-outline</v-icon>
-                      </v-list-item-icon>
-                      <v-list-item-content>
-                        <v-list-item-title>schedule</v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
+                  <v-list-item link>
+                    <v-list-item-icon>
+                      <v-icon>mdi-bell-outline</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Reminder</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
 
                   <!-- schedule todo -->
                   <!-- delete todo -->
@@ -81,8 +76,14 @@
           <v-divider></v-divider>
         </v-card>
       </v-list>
-      <v-list v-else> there are no todoos </v-list>
-      <div class="mb-5"></div>
+      <v-list v-else class="notodos">
+        <center>
+          <v-icon x-large>mdi-calendar-blank</v-icon>
+          <br />
+          <br />
+          there are no todos
+        </center>
+      </v-list>
     </v-container>
     <v-dialog v-model="dialog" max-width="500px" transition="dialog-transition">
       <v-card tile :class="'pa-3 ' + todo.priority">
@@ -112,7 +113,6 @@ import {
   differenceInHours,
 } from "date-fns";
 import DeleteTodo from "./dialogs/DeleteTodo";
-// import UpdateTodo from "./dialogs/UpdateTodo";
 export default {
   components: {
     DeleteTodo,
@@ -133,29 +133,14 @@ export default {
     },
   },
   methods: {
-    go() {
-      this.$router.push("/edit/4");
-    },
-    onMenuToggle(opened) {
-      if (opened) return;
-    },
+
+  
     showEditDialog(n) {
       this.editDialog = true;
       console.log(n);
     },
-    updateTodo() {
-      //   this.editdialog = true;
-      //   this.id = n.id;
-      //   this.content = n.content;
-      //   this.dueDate = n.dueDate;
-    },
-    closemenu() {
-      alert("closing...");
-      this.shown = false;
-    },
-    forceRerender() {
-      this.componentreload += 1;
-    },
+   
+  
     viewTodo(n) {
       this.todo = n;
       this.dialog = true;
@@ -195,18 +180,6 @@ export default {
       }
     },
   },
-  watch: {
-    // todos: {
-    //   // This will let Vue know to look inside the array
-    //   deep: true,
-    //   // We have to move our method to a handler field
-    //   handler() {
-    //     // this.forceRerender()
-    //     this.$forceUpdate();
-    //     console.log("The list of colours has changed!" + this.todos.done);
-    //   },
-    // },
-  },
 };
 </script>
 
@@ -219,5 +192,10 @@ export default {
 }
 .High {
   border-left: 5px #ee4e39 solid !important;
+}
+
+.notodos{
+  margin-top: 130px;
+  margin-bottom: 150px;
 }
 </style>

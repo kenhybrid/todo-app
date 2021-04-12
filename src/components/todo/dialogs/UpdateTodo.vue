@@ -88,18 +88,19 @@ export default {
   },
   methods: {
     editTodo() {
-      
-      if (this.content != null && this.priority != null && this.dueDate != null) {
-        this.$store
-        .dispatch("updateTodo", {
-          id:this.id,
+      if (
+        this.content != null &&
+        this.priority != null &&
+        this.dueDate != null
+      ) {
+        this.$store.dispatch("updateTodo", {
+          id: this.id,
           content: this.content,
           dueDate: this.dueDate,
           priority: this.priority,
-        })
+        });
       } else {
         this.snackbar = true;
-        
       }
     },
   },
