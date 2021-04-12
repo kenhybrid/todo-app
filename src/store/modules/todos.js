@@ -97,12 +97,12 @@ const actions = {
       priority: payload.priority,
       author: state.author,
     };
+    router.push("/");
+
     firestore
       .collection("todos")
       .add(todo)
       .then((doc) => {
-        router.push("/");
-
         const data = {
           id: doc.id,
           content: payload.content,
@@ -160,6 +160,8 @@ const actions = {
       });
   },
   updateTodo({ commit }, payload) {
+    router.push("/");
+
     firestore
       .collection("todos")
       .doc(payload.id)
@@ -169,7 +171,6 @@ const actions = {
         priority: payload.priority,
       })
       .then(() => {
-        router.push("/");
 
         commit("UPDATE_TODO", payload);
         commit("SET_NOTIFICATION", {
