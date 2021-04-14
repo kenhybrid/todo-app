@@ -32,6 +32,19 @@ const routes = [
     component: () => import("../views/Notes.vue"),
   },
   {
+    path: "/createnote",
+    name: "createNote",
+    meta: { requiresAuth: true },
+    component: () => import("../components/notes/dialogs/CreateNote.vue"),
+  },
+  {
+    path: "/editnote/:id",
+    props:true,
+    name: "EditNote",
+    meta: { requiresAuth: true },
+    component: () => import("../components/notes/dialogs/UpdateNote.vue"),
+  },
+  {
     path: "/edit/:id",
     props:true,
     name: "Edit",
@@ -56,7 +69,6 @@ router.beforeEach((to, from, next) => {
     //check for requiresauthguard
     if (!store.getters.getUser) {
       //go to login
-      console.log(store.state.authState)
 
       next({
         path: "/login",
@@ -71,7 +83,6 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
     //if logged in
     if (store.state.authState) {
-      console.log(store.getters.getUser)
       //go to login
       next({
         path: "/",

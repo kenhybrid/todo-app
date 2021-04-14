@@ -54,7 +54,7 @@
             prepend-inner-icon="mdi-view-list-outline"
             outlined
           ></v-select>
-          <v-btn class="primary" fab bottom right fixed dark @click.once="addTodo">
+          <v-btn class="primary" fab bottom right fixed dark @click="addTodo">
             <v-icon small>mdi-content-save-outline</v-icon>
           </v-btn>
           <!-- <v-btn block color="primary" dark @click="addTodo">Add Todo</v-btn> -->
