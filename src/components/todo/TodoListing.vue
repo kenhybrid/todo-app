@@ -1,10 +1,9 @@
 <template>
   <div>
-  
     <v-container grid-list-xs class="mb-5 pb-5">
       <v-list subheader two-line v-if="todos.length > 0">
         <v-divider></v-divider>
-        <v-card :class="n.priority" flat link v-for="n in todos" :key="n.index">
+        <v-card :class="n.priority" flat link v-for="n in todos" :key="n.id">
           <v-list-item>
             <v-list-item-avatar>
               <v-checkbox
@@ -75,6 +74,8 @@
           </v-list-item>
           <v-divider></v-divider>
         </v-card>
+      <div class="mb-5 pb-5"></div>
+
       </v-list>
       <v-list v-else class="notodos">
         <center>
@@ -133,14 +134,11 @@ export default {
     },
   },
   methods: {
-
-  
     showEditDialog(n) {
       this.editDialog = true;
       console.log(n);
     },
-   
-  
+
     viewTodo(n) {
       this.todo = n;
       this.dialog = true;
@@ -194,7 +192,7 @@ export default {
   border-left: 5px #ee4e39 solid !important;
 }
 
-.notodos{
+.notodos {
   margin-top: 130px;
   margin-bottom: 150px;
 }

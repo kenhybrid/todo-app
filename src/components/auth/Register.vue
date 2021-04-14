@@ -4,7 +4,7 @@
       <v-layout row wrap>
         <v-flex sm8 offset-sm2>
           <v-form @submit.prevent="" class="form">
-            <img src="../../assets/1.jpeg" class="avatar" alt="" />
+            <img src="../../assets/avatar.svg" class="avatar" alt="" />
             <v-subheader class="center">REGISTER</v-subheader>
             <v-text-field
               label="email"
@@ -43,7 +43,7 @@ export default {
     return {
       email: "",
       password: "",
-      loading:false
+      loading: false,
     };
   },
   methods: {

@@ -22,9 +22,9 @@ const getters = {
       });
     };
   },
-  getNotification(state) {
-    return state.notification;
-  },
+  // getNotification(state) {
+  //   return state.notification;
+  // },
 };
 
 const mutations = {
@@ -42,11 +42,20 @@ const mutations = {
     state.notification.icon = "";
   },
   SET_TODO(state, payload) {
-    state.todos.unshift(payload);
+    // if (state.todos.some((e) => e == payload.id)) return;
+    let array = state.todos;
+    array.unshift(payload);
+
+    let ids = array.map((o) => o.id);
+    let filtered = array.filter(
+      ({ id }, index) => !ids.includes(id, index + 1)
+    );
+    return state.todos =filtered
   },
   SET_TODOS(state, payload) {
     state.todos = payload;
   },
+  
   UPDATE_TODO(state, payload) {
     const todo = state.todos.find((todo) => {
       return todo.id === payload.id;
@@ -97,7 +106,7 @@ const actions = {
       priority: payload.priority,
       author: state.author,
     };
-    router.push("/");
+    router.replace("/");
 
     firestore
       .collection("todos")
@@ -112,12 +121,14 @@ const actions = {
           priority: payload.priority,
         };
 
-        commit("SET_TODO", data);
         commit("SET_NOTIFICATION", {
           snackbar: true,
           message: "Todo has been created",
           icon: "mdi-check",
+          doc: doc,
         });
+        commit("SET_TODO", data);
+
         new Audio(require("@/assets/notification.mp3")).play();
       })
       .catch(() => {
@@ -151,12 +162,12 @@ const actions = {
         commit("CLEAR_NOTIFICATION");
       })
       .catch(() => {
-        // commit("SET_NOTIFICATION", {
-        //   snackbar: true,
-        //   message: "Failed getting todos",
-        //   icon: "mdi-alert-outline",
-        // });
-        // commit("CLEAR_NOTIFICATION");
+        commit("SET_NOTIFICATION", {
+          snackbar: true,
+          message: "Failed getting todos",
+          icon: "mdi-alert-outline",
+        });
+        commit("CLEAR_NOTIFICATION");
       });
   },
   updateTodo({ commit }, payload) {
@@ -171,7 +182,6 @@ const actions = {
         priority: payload.priority,
       })
       .then(() => {
-
         commit("UPDATE_TODO", payload);
         commit("SET_NOTIFICATION", {
           snackbar: true,

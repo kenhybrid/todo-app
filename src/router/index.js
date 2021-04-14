@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
-import { auth } from "../plugins/firebase";
+import store from "../store";
 import Todo from "../views/Todo.vue"
 
 const routes = [
@@ -54,8 +54,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     //check for requiresauthguard
-    if (!auth.currentUser) {
+    if (!store.getters.getUser) {
       //go to login
+      console.log(store.state.authState)
+
       next({
         path: "/login",
         query: {
@@ -68,7 +70,8 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
     //if logged in
-    if (auth.currentUser) {
+    if (store.state.authState) {
+      console.log(store.getters.getUser)
       //go to login
       next({
         path: "/",
