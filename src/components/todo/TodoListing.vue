@@ -53,7 +53,7 @@
 
                   <!-- update end -->
                   <!-- schedule todo -->
-                  <v-list-item link>
+                  <v-list-item link @click="setReminder(n)">
                     <v-list-item-icon>
                       <v-icon>mdi-bell-outline</v-icon>
                     </v-list-item-icon>
@@ -104,6 +104,18 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+     <v-dialog v-model="reminder" max-width="500px" transition="dialog-transition">
+      <v-card tile :class="'pa-3 ' + todo.priority">
+        <v-card-text>
+          <center class="my-5">
+            <v-icon x-large >mdi-bell-ring-outline</v-icon>
+            <br><br>
+            <span>Coming soon</span>
+          </center>
+        </v-card-text>
+        
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -125,6 +137,7 @@ export default {
       todo: {},
       closeOnClick: true,
       dialog: false,
+      reminder: false,
       componentreload: 0,
     };
   },
@@ -134,15 +147,19 @@ export default {
     },
   },
   methods: {
-    showEditDialog(n) {
-      this.editDialog = true;
-      console.log(n);
-    },
+    // showEditDialog(n) {
+    //   this.editDialog = true;
+    //   console.log(n);
+    // },
 
     viewTodo(n) {
       this.todo = n;
       this.dialog = true;
+    },setReminder(n) {
+      this.todo = n;
+      this.reminder = true;
     },
+    
     updateStatus(status) {
       // console.log(status);
       if (status == true) {

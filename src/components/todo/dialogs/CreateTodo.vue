@@ -9,7 +9,6 @@
           <v-subheader class="center">CREATE A TASK</v-subheader>
 
           <v-spacer></v-spacer>
-          <v-btn dark text icon><v-icon>mdi-dots-horizontal</v-icon></v-btn>
         </v-app-bar>
         <v-form class="py-5 px-2">
           <v-text-field
