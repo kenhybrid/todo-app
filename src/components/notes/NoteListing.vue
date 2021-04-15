@@ -85,7 +85,7 @@
         :overlay="false"
       >
         <v-card flat tile>
-          <v-toolbar dense elevation="0" color="white">
+          <v-toolbar dense elevation="0" color="dark">
             <v-btn icon @click.native="dialog = false" dark>
               <v-icon color="primary">mdi-arrow-left</v-icon>
             </v-btn>
