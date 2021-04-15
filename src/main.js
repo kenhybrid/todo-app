@@ -22,6 +22,7 @@ auth.onAuthStateChanged(() => {
         //  load todos and notes
         this.$store.dispatch("getAuthor")
         this.$store.commit("CLEAR_NOTIFICATION")
+        this.$store.dispatch("getLogedAuthor")
       }
     }).$mount("#app");
   }

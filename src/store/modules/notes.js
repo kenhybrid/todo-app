@@ -1,4 +1,4 @@
-import { firestore } from "../../plugins/firebase";
+import {auth, firestore } from "../../plugins/firebase";
 import router from "../../router";
 const state = {
   notes: [],
@@ -25,6 +25,9 @@ const getters = {
 const mutations = {
   SET_NOTES(state, payload) {
     state.notes = payload;
+  },
+  SET_AUTHOR(state, payload) {
+    state.author = payload;
   },
   SET_NOTIFICATION(state, payload) {
     state.notification.snackbar = payload.snackbar;
@@ -69,6 +72,13 @@ const mutations = {
 };
 
 const actions = {
+  getLogedAuthor({ commit }) {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        commit("SET_AUTHOR", user.uid);
+      }
+    });
+  },
   getAllNotes({ commit, state }) {
     firestore
       .collection("notes")
