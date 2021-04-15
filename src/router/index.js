@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import store from "../store";
 import Todo from "../views/Todo.vue"
-
+import Note from "../views/Notes.vue"
 const routes = [
   {
     path: "/",
@@ -29,7 +29,7 @@ const routes = [
     path: "/notes",
     name: "Notes",
     meta: { requiresAuth: true },
-    component: () => import("../views/Notes.vue"),
+    component: Note,
   },
   {
     path: "/createnote",
