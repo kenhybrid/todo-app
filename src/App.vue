@@ -22,6 +22,6 @@ export default {
 
 <style scoped>
 .bg {
-  background-color: rgb(252, 252, 252);
+  background-color: rgb(230, 224, 224)!important;
 }
 </style>

@@ -45,7 +45,7 @@
       <div>
         <v-tooltip v-if="!$vuetify.theme.dark" bottom>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="info" icon @click="darkMode">
+            <v-btn v-on="on" color="yellow" icon @click="darkMode">
               <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
             </v-btn>
           </template>
@@ -166,13 +166,13 @@ export default {
   mounted() {
     const theme = localStorage.getItem("dark_theme");
     if (theme) {
-        if (theme == "true") {
-            this.$vuetify.theme.dark = true;
-        } else {
-            this.$vuetify.theme.dark = false;
-        }
+      if (theme == "true") {
+        this.$vuetify.theme.dark = true;
+      } else {
+        this.$vuetify.theme.dark = false;
+      }
     }
-},
+  },
 };
 </script>
 <style scoped>
