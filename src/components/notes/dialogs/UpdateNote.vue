@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card tile flat class="pa-3">
-      <v-app-bar elevation="0" color="white">
+    <v-card tile flat class="transparent">
+      <v-app-bar elevation="0" color="dark">
         <v-btn icon dark @click="() => $router.go(-1)">
           <v-icon color="primary">mdi-arrow-left</v-icon>
         </v-btn>
@@ -9,7 +9,7 @@
 
         <v-spacer></v-spacer>
       </v-app-bar>
-      <v-form @submit.prevent>
+      <v-form @submit.prevent class="pa-4">
         <v-text-field label="Title" outlined clearable v-model="title"></v-text-field>
         <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>
         <v-btn

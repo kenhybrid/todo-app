@@ -22,9 +22,7 @@ const getters = {
       });
     };
   },
-  // getNotification(state) {
-  //   return state.notification;
-  // },
+  
 };
 
 const mutations = {
@@ -76,7 +74,7 @@ const mutations = {
     });
     state.todos.splice(index, 1);
   },
-  searcTodos(state, payload) {
+  searchTodos(state, payload) {
     let results = [];
     if (payload == null || payload == "") {
       return state.todos;

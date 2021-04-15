@@ -1,9 +1,16 @@
 <template>
   <div>
     <v-container grid-list-xs class="mb-5 pb-5">
-      <v-list subheader two-line v-if="todos.length > 0">
-        <v-divider></v-divider>
-        <v-card :class="n.priority" flat link v-for="n in todos" :key="n.id">
+      <div v-if="todos.length > 0" class="mb-5 pb-5">
+        <!-- <v-divider></v-divider> -->
+        <v-list
+          :class="'border-list ' + n.priority"
+          subheader
+          two-line
+          link
+          v-for="n in todos"
+          :key="n.id"
+        >
           <v-list-item>
             <v-list-item-avatar>
               <v-checkbox
@@ -72,21 +79,22 @@
               <!-- menu -->
             </v-list-item-action>
           </v-list-item>
-          <v-divider></v-divider>
-        </v-card>
-        <div class="mb-5 pb-5"></div>
-      </v-list>
-      <v-list v-else class="notodos">
+          <!-- <v-divider></v-divider> -->
+        </v-list>
+        <!-- <div class="mb-5 pb-5"></div> -->
+      </div>
+      <div v-else class="notodos">
         <center>
           <v-icon x-large>mdi-calendar-blank</v-icon>
           <br />
           <br />
           there are no todos
         </center>
-      </v-list>
+      </div>
     </v-container>
     <v-dialog v-model="dialog" max-width="500px" transition="dialog-transition">
-      <v-card tile :class="'pa-3 ' + todo.priority">
+      <v-card tile  :class="'pa-3 ' + todo.priority" >
+        <!-- :class="'pa-3 ' + todo.priority" -->
         <v-card-text>
           {{ todo.content }}
           <br />
@@ -108,7 +116,7 @@
       max-width="500px"
       transition="dialog-transition"
     >
-      <v-card tile :class="'pa-3 ' + todo.priority">
+      <v-card tile  :class="'pa-3 ' + todo.priority" >
         <v-card-text>
           <center class="my-5">
             <v-icon x-large>mdi-bell-ring-outline</v-icon>
@@ -196,7 +204,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .Medium {
   border-left: 5px #f39108 solid !important;
 }
@@ -210,5 +218,9 @@ export default {
 .notodos {
   margin-top: 130px;
   margin-bottom: 150px;
+}
+.border-list {
+  margin-top: 2px;
+  /* margin-bottom: 2px; */
 }
 </style>

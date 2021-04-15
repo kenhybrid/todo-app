@@ -42,7 +42,25 @@
       </v-container>
 
       <v-spacer></v-spacer>
+      <div>
+        <v-tooltip v-if="!$vuetify.theme.dark" bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="info" icon @click="darkMode">
+              <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode On</span>
+        </v-tooltip>
 
+        <v-tooltip v-else bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="info" icon @click="darkMode">
+              <v-icon color="yellow">mdi-white-balance-sunny</v-icon>
+            </v-btn>
+          </template>
+          <span>Dark Mode Off</span>
+        </v-tooltip>
+      </div>
       <v-btn icon v-if="!search" @click="search = !search">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -52,7 +70,7 @@
         <v-img src="../../assets/wallpaper1.jpg"> </v-img>
       </v-list> -->
     <!-- side nav -->
-    <v-navigation-drawer app v-model="drawer" color="white">
+    <v-navigation-drawer app v-model="drawer" color="dark">
       <v-list class="primary" height="180px">
         <div class="bottom ">
           <v-avatar size="56" color="white" class=" ma-1">
@@ -64,7 +82,7 @@
           </v-avatar>
           <br />
           <small>
-            <b class="white--text">
+            <b class="dark--text">
               {{ user }}
             </b>
           </small>
@@ -79,6 +97,7 @@
           router
           :to="link.link"
           active-class="primary--text"
+          class="primary--text"
         >
           <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
@@ -124,11 +143,15 @@ export default {
     },
   },
   methods: {
+    darkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
+    },
     SearchTodos() {
       if (this.searchTerm != "") {
-         this.$store.commit("searcTodos", this.searchTerm);
+        this.$store.commit("searchTodos", this.searchTerm);
       } else {
-         this.$store.dispatch("getAllTodos");
+        this.$store.dispatch("getAllTodos");
       }
     },
     logout() {
@@ -140,7 +163,16 @@ export default {
       this.$store.dispatch("getAllTodos");
     },
   },
-  
+  mounted() {
+    const theme = localStorage.getItem("dark_theme");
+    if (theme) {
+        if (theme == "true") {
+            this.$vuetify.theme.dark = true;
+        } else {
+            this.$vuetify.theme.dark = false;
+        }
+    }
+},
 };
 </script>
 <style scoped>

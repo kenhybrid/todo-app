@@ -1,19 +1,25 @@
 <template>
   <div>
-    <v-container grid-list-xs>
-      <v-list subheader two-line v-if="notes.length > 0">
-        <v-divider></v-divider>
-        <v-card flat link v-for="(n,index) in notes" :key="n.id">
+    <v-container grid-list-xs class="mb-5 pb-5">
+      <div v-if="notes.length > 0" class="mb-5 pb-5">
+        <!-- <v-divider></v-divider> -->
+        <v-list
+          class="border-list"
+          subheader
+          two-line
+          link
+          v-for="(n, index) in notes"
+          :key="n.id"
+        >
           <v-list-item>
             <v-list-item-avatar>
-              <v-avatar
-                size="48"
-              >
-              <span class="primary--text">{{1 +index}}</span>
+              <v-avatar size="48">
+                <span class="primary--text">{{ 1 + index }}</span>
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>{{ n.title }} .</v-list-item-title>
+              <!-- <v-list-tile-sub-title>subTitle</v-list-tile-sub-title> -->
               <small
                 ><b>{{ n.createdAt | dateFilter }}</b></small
               >
@@ -59,41 +65,38 @@
               <!-- menu -->
             </v-list-item-action>
           </v-list-item>
-          <v-divider></v-divider>
-        </v-card>
-        <div class="mb-5 pb-5"></div>
-      </v-list>
-      <v-list v-else class="notodos">
+          <!-- <v-divider></v-divider> -->
+        </v-list>
+      </div>
+      <div v-else class="notodos">
         <center>
           <v-icon x-large>mdi-book-outline</v-icon>
           <br />
           <br />
           you have no notes yet
         </center>
-      </v-list>
+      </div>
     </v-container>
     <!-- full screen dialog -->
-    <v-layout row justify-center>
       <v-dialog
         v-model="dialog"
         fullscreen
         transition="dialog-bottom-transition"
         :overlay="false"
       >
-        <v-card flat tile >
+        <v-card flat tile>
           <v-toolbar dense elevation="0" color="white">
             <v-btn icon @click.native="dialog = false" dark>
               <v-icon color="primary">mdi-arrow-left</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
           </v-toolbar>
-          <v-card-text> 
-            <v-subheader>{{note.title}}</v-subheader>
+          <v-card-text>
+            <v-subheader>{{ note.title }}</v-subheader>
             <div v-html="note.body"></div>
           </v-card-text>
         </v-card>
       </v-dialog>
-    </v-layout>
     <!-- full screen dialog -->
   </div>
 </template>
@@ -153,9 +156,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .notodos {
   margin-top: 130px;
   margin-bottom: 150px;
+}
+.border-list {
+  margin-top: 2px;
+  /* margin-bottom: 2px; */
 }
 </style>
