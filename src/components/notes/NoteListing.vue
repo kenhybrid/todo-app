@@ -11,6 +11,9 @@
           v-for="(n, index) in notes"
           :key="n.id"
         >
+         <v-divider
+          
+        ></v-divider>
           <v-list-item>
             <v-list-item-avatar>
               <v-avatar size="48">
@@ -74,13 +77,16 @@
           </v-list-item>
           <!-- <v-divider></v-divider> -->
         </v-list>
+        <v-divider
+          
+        ></v-divider>
       </div>
       <div v-else class="notodos">
         <center>
           <v-icon x-large>mdi-book-outline</v-icon>
           <br />
           <br />
-          you have no notes yet
+          No notes yet!
         </center>
       </div>
     </v-container>
@@ -99,7 +105,7 @@
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
-          <v-subheader>{{ note.title }}</v-subheader>
+          <v-subheader class="text-capitalize">{{ note.title }}</v-subheader>
           <div v-html="note.body"></div>
         </v-card-text>
       </v-card>

@@ -56,13 +56,17 @@ export default {
       email: "",
       username:"",
       password: "",
-      loading: false,
       rules: {
         required: (value) => !!value || "Required.",
         min: (v) => v.length >= 6 || "Min 6 characters",
         // emailMatch: () => ('The email and password you entered don\'t match'),
       },
     };
+  },
+   computed: {
+    loading() {
+      return this.$store.getters.getLoading;
+    },
   },
   methods: {
     register() {

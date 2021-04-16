@@ -11,6 +11,9 @@
           v-for="n in todos"
           :key="n.id"
         >
+        <v-divider
+          
+        ></v-divider>
           <v-list-item>
             <v-list-item-avatar>
               <v-checkbox
@@ -89,14 +92,17 @@
           </v-list-item>
           <!-- <v-divider></v-divider> -->
         </v-list>
+        <v-divider
+          
+        ></v-divider>
         <!-- <div class="mb-5 pb-5"></div> -->
       </div>
       <div v-else class="notodos">
         <center>
-          <v-icon x-large>mdi-calendar-blank</v-icon>
+          <v-icon x-large>mdi-format-list-checks</v-icon>
           <br />
           <br />
-          there are no todos
+          No todos yet!
         </center>
       </div>
     </v-container>
