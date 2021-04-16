@@ -70,6 +70,14 @@
                   </v-list-item>
 
                   <!-- schedule todo -->
+                  <v-list-item link>
+                    <v-list-item-icon>
+                      <v-icon>mdi-share-outline</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Share</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                   <!-- delete todo -->
 
                   <DeleteTodo :id="n.id" />

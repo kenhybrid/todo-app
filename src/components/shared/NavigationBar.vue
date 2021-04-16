@@ -27,7 +27,7 @@
       </v-app-bar-title>
       <v-container grid-list-xs>
         <v-text-field
-          v-if="search"
+          v-if="search && $route.name == 'Todo'"
           outlined
           autocomplete="off"
           @click:append="close"
@@ -39,10 +39,23 @@
           label="search"
           id="id"
         ></v-text-field>
+        <v-text-field
+          v-if="search && $route.name == 'Notes'"
+          outlined
+          autocomplete="off"
+          @click:append="close"
+          class="mt-1"
+          append-icon="mdi-close"
+          v-model="searchTerm"
+          @keyup="SearchNotes"
+          name="name"
+          label="search"
+          id="id"
+        ></v-text-field>
       </v-container>
 
       <v-spacer></v-spacer>
-      <div>
+      <div v-if="!search">
         <v-tooltip v-if="!$vuetify.theme.dark" bottom>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" color="yellow" icon @click="darkMode">
@@ -152,6 +165,13 @@ export default {
         this.$store.commit("searchTodos", this.searchTerm);
       } else {
         this.$store.dispatch("getAllTodos");
+      }
+    },
+    SearchNotes() {
+      if (this.searchTerm != "") {
+        this.$store.commit("searchNotes", this.searchTerm);
+      } else {
+        this.$store.dispatch("getAllNotes");
       }
     },
     logout() {

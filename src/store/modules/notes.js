@@ -69,6 +69,17 @@ const mutations = {
     }
     
   },
+  searchNotes(state, payload) {
+    let results = [];
+    if (payload == null || payload == "") {
+      return state.notes;
+    } else {
+      results = state.notes.filter((note) => {
+        return note.title.toUpperCase().includes(payload.toUpperCase());
+      });
+      return (state.notes = results);
+    }
+  }
 };
 
 const actions = {
