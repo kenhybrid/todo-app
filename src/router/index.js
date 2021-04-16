@@ -2,27 +2,23 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import store from "../store";
-import Todo from "../views/Todo.vue"
-import Note from "../views/Notes.vue"
+import Todo from "../views/Todo.vue";
+import Note from "../views/Notes.vue";
 const routes = [
   {
     path: "/",
     name: "Todo",
     meta: { requiresAuth: true },
-    component: Todo
+    component: Todo,
   },
   {
     path: "/login",
     name: "Login",
-    meta: { requiresGuest: true },
-
     component: () => import("../views/Login.vue"),
   },
   {
     path: "/register",
     name: "Register",
-    meta: { requiresGuest: true },
-
     component: () => import("../views/Register.vue"),
   },
   {
@@ -39,18 +35,26 @@ const routes = [
   },
   {
     path: "/editnote/:id",
-    props:true,
+    props: true,
     name: "EditNote",
     meta: { requiresAuth: true },
     component: () => import("../components/notes/dialogs/UpdateNote.vue"),
   },
   {
+    path: "/share/:id",
+    props: true,
+    name: "Share",
+    meta: { requiresAuth: true },
+    component: () => import("../components/send/Share.vue"),
+  },
+  {
     path: "/edit/:id",
-    props:true,
+    props: true,
     name: "Edit",
     meta: { requiresAuth: true },
     component: () => import("../components/todo/dialogs/UpdateTodo.vue"),
-  },{
+  },
+  {
     path: "/create",
     name: "CreateTodo",
     meta: { requiresAuth: true },
@@ -64,38 +68,50 @@ const router = new VueRouter({
   routes,
 });
 
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     //check for requiresauthguard
+//     if (!store.getters.getUser) {
+//       //go to login
+
+//       next({
+//         path: "/login",
+//         query: {
+//           redirect: to.fullpath,
+//         },
+//       });
+//     } else {
+//       //proced to route
+//       next();
+//     }
+//   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
+//     //if logged in
+//     if (store.state.authState) {
+//       //go to login
+//       next({
+//         path: "/",
+//         query: {
+//           redirect: to.fullpath,
+//         },
+//       });
+//     } else {
+//       //proced to route
+//       next();
+//     }
+//   } else {
+//     //proced to route
+//     next();
+//   }
+// });
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    //check for requiresauthguard
-    if (!store.getters.getUser) {
-      //go to login
-
-      next({
-        path: "/login",
-        query: {
-          redirect: to.fullpath,
-        },
-      });
-    } else {
-      //proced to route
+    if (store.getters.getAuthState == true) {
       next();
+      return;
     }
-  } else if (to.matched.some((record) => record.meta.requiresGuest)) {
-    //if logged in
-    if (store.state.authState) {
-      //go to login
-      next({
-        path: "/",
-        query: {
-          redirect: to.fullpath,
-        },
-      });
-    } else {
-      //proced to route
-      next();
-    }
+    next("/login");
   } else {
-    //proced to route
     next();
   }
 });

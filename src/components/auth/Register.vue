@@ -7,19 +7,30 @@
             <img src="../../assets/fingerprint.jpg" class="avatar" alt="" />
             <v-subheader class="center">REGISTER</v-subheader>
             <v-text-field
-              label="email"
+              :rules="[rules.required]"
+              label="Username"
+              prepend-inner-icon="mdi-face-outline"
+              color="grey"
+              v-model="username"
+            ></v-text-field>
+            <v-text-field
+              :rules="[rules.required]"
+              label="Email"
               prepend-inner-icon="mdi-email-outline"
               color="grey"
               v-model="email"
             ></v-text-field>
             <v-text-field
-              type="password"
+              :rules="[rules.required, rules.min]"
+              prepend-inner-icon="mdi-key-outline"
+              label="Password"
               v-model="password"
-              color="grey"
-              label="password"
-              required
-              prepend-inner-icon="mdi-eye-outline"
-            ></v-text-field>
+              :type="show ? 'text' : 'password'"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show = !show"
+            >
+              ></v-text-field
+            >
             <v-btn
               class="primary mt-5"
               block
@@ -41,9 +52,16 @@
 export default {
   data() {
     return {
+      show: false,
       email: "",
+      username:"",
       password: "",
       loading: false,
+      rules: {
+        required: (value) => !!value || "Required.",
+        min: (v) => v.length >= 6 || "Min 6 characters",
+        // emailMatch: () => ('The email and password you entered don\'t match'),
+      },
     };
   },
   methods: {
@@ -51,6 +69,7 @@ export default {
       this.$store.dispatch("userSignUp", {
         password: this.password,
         email: this.email,
+        username: this.username,
       });
     },
   },

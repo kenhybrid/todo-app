@@ -70,7 +70,7 @@
                   </v-list-item>
 
                   <!-- schedule todo -->
-                  <v-list-item link>
+                  <v-list-item link :to="'/share/' + n.id">
                     <v-list-item-icon>
                       <v-icon>mdi-share-outline</v-icon>
                     </v-list-item-icon>

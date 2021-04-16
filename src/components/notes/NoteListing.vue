@@ -55,7 +55,7 @@
                       <v-list-item-title>Edit</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
-                  <v-list-item link>
+                  <v-list-item link :to="'/share/' + n.id">
                     <v-list-item-icon>
                       <v-icon>mdi-share-outline</v-icon>
                     </v-list-item-icon>
@@ -85,25 +85,25 @@
       </div>
     </v-container>
     <!-- full screen dialog -->
-      <v-dialog
-        v-model="dialog"
-        fullscreen
-        transition="dialog-bottom-transition"
-        :overlay="false"
-      >
-        <v-card flat tile>
-          <v-toolbar dense elevation="0" color="dark">
-            <v-btn icon @click.native="dialog = false" dark>
-              <v-icon color="primary">mdi-arrow-left</v-icon>
-            </v-btn>
-            <v-spacer></v-spacer>
-          </v-toolbar>
-          <v-card-text>
-            <v-subheader>{{ note.title }}</v-subheader>
-            <div v-html="note.body"></div>
-          </v-card-text>
-        </v-card>
-      </v-dialog>
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      transition="dialog-bottom-transition"
+      :overlay="false"
+    >
+      <v-card flat tile>
+        <v-toolbar dense elevation="0" color="dark">
+          <v-btn icon @click.native="dialog = false" dark>
+            <v-icon color="primary">mdi-arrow-left</v-icon>
+          </v-btn>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-card-text>
+          <v-subheader>{{ note.title }}</v-subheader>
+          <div v-html="note.body"></div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <!-- full screen dialog -->
   </div>
 </template>

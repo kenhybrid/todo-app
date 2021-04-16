@@ -90,16 +90,20 @@
         <v-avatar size="56" color="primary" class=" ma-1">
           <b>
             <span class="white--text headline">{{
-              user.slice(0, 1).toUpperCase()
+              user.email.slice(0, 1).toUpperCase()
             }}</span>
           </b>
         </v-avatar>
-        <br />
-        <small>
-          <b class="white--text">
-            {{ user }}
-          </b>
-        </small>
+        <v-list subheader>
+          <v-list-item-content>
+            <v-list-item-title class="text-capitalize"> {{ user.username }}</v-list-item-title>
+            <small>
+              <span class="white--text">
+                {{ user.email }}
+              </span>
+            </small>
+          </v-list-item-content>
+        </v-list>
       </div>
       <!-- links -->
       <v-list class="top-2">
@@ -204,7 +208,7 @@ export default {
   margin-top: -8px !important;
 }
 .bottom {
-  top: 75px;
+  top: 60px;
   padding: 5px;
   position: absolute;
 }

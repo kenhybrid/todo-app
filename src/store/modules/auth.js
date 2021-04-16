@@ -1,10 +1,10 @@
-import { auth } from "../../plugins/firebase";
+import { auth, firestore } from "../../plugins/firebase";
 import router from "../../router";
 
 const state = {
   // auth state
-  user: "",
-  // member:false,
+  user: {},
+
   currentUser: "",
   authState: false,
   loading: false,
@@ -25,6 +25,9 @@ const getters = {
   getUser(state) {
     return state.user;
   },
+  getAuthState(state){
+    return state.authState
+  }
 };
 
 const mutations = {
@@ -51,7 +54,20 @@ const actions = {
 
     auth
       .createUserWithEmailAndPassword(payload.email, payload.password)
-      .then(() => {
+      .then((user) => {
+        const data = {
+          email: payload.email,
+          username: payload.username,
+          author: user.user.uid,
+        };
+        firestore
+          .collection("users")
+          .add(data)
+          .then(() => {
+          })
+          .catch(() => {
+            // console.log(error);
+          });
         commit("SET_LOADING", false);
 
         commit("SET_NOTIFICATION", {
@@ -80,9 +96,27 @@ const actions = {
     auth
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then((user) => {
-        commit("SET_LOADING", false);
+        // get user from firestore
+        firestore
+          .collection("users")
+          .where("author", "==", user.user.uid)
+          .get()
+          .then((docs) => {
+            // const users = [];
+            docs.forEach((doc) => {
+              const data = {
+                id: doc.id,
+                email: doc.data().email,
+                username: doc.data().username,
+              };
+              commit("SET_USER", data);
+            });
+          })
+          .catch(() => {
+            // console.log(error);
+          });
 
-        commit("SET_USER", user.user.email);
+        commit("SET_LOADING", false);
         commit("SET_AUTH_STATE", true);
         // redirect
         router.push("/");

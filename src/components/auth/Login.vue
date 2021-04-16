@@ -7,18 +7,20 @@
             <img src="../../assets/fingerprint.jpg" class="avatar" alt="" />
             <v-subheader class="center">LOGIN</v-subheader>
             <v-text-field
-              label="email"
+              :rules="[rules.required, rules.min]"
+              label="Email"
               prepend-inner-icon="mdi-email-outline"
               color="grey"
               v-model="email"
             ></v-text-field>
             <v-text-field
-              type="password"
+              :rules="[rules.required, rules.min]"
+              prepend-inner-icon="mdi-key-outline"
+              label="Password"
               v-model="password"
-              color="grey"
-              label="password"
-              required
-              prepend-inner-icon="mdi-eye-outline"
+              :type="show ? 'text' : 'password'"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show = !show"
             ></v-text-field>
             <v-btn
               class="primary mt-5"
@@ -43,6 +45,12 @@ export default {
     return {
       email: "",
       password: "",
+      show: false,
+      rules: {
+        required: (value) => !!value || "Required.",
+        min: (v) => v.length >= 6 || "Min 6 characters",
+        // emailMatch: () => ('The email and password you entered don\'t match'),
+      },
     };
   },
   computed: {
