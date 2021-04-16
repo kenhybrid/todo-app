@@ -1,7 +1,7 @@
 <template>
   <div>
     <Register />
-    <v-btn router block text to="/login" class="bottom">
+    <v-btn router block text to="/login" class="bottom primary--text">
       <span>Login</span>
     </v-btn>
   </div>

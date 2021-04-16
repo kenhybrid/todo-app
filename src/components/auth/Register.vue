@@ -4,7 +4,7 @@
       <v-layout row wrap>
         <v-flex sm8 offset-sm2>
           <v-form @submit.prevent="" class="form">
-            <img src="../../assets/avatar.svg" class="avatar" alt="" />
+            <img src="../../assets/fingerprint.jpg" class="avatar" alt="" />
             <v-subheader class="center">REGISTER</v-subheader>
             <v-text-field
               label="email"
@@ -21,7 +21,7 @@
               prepend-inner-icon="mdi-eye-outline"
             ></v-text-field>
             <v-btn
-              class="my-purple mt-5"
+              class="primary mt-5"
               block
               large
               @click="register"

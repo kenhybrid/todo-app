@@ -14,7 +14,7 @@
             ></v-text-field>
 
             <v-btn
-              class="my-purple mt-5"
+              class="primary mt-5"
               block
               large
               @click="login"

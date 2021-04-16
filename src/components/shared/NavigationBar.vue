@@ -71,23 +71,23 @@
       </v-list> -->
     <!-- side nav -->
     <v-navigation-drawer app v-model="drawer" color="dark">
-      <v-list class="primary" height="180px">
-        <div class="bottom ">
-          <v-avatar size="56" color="white" class=" ma-1">
-            <b>
-              <span class="black--text headline">{{
-                user.slice(0, 1).toUpperCase()
-              }}</span>
-            </b>
-          </v-avatar>
-          <br />
-          <small>
-            <b class="dark--text">
-              {{ user }}
-            </b>
-          </small>
-        </div>
-      </v-list>
+      <v-img src="../../assets/pattern.png" class="bg-image"> </v-img>
+
+      <div class="bottom ">
+        <v-avatar size="56" color="primary" class=" ma-1">
+          <b>
+            <span class="white--text headline">{{
+              user.slice(0, 1).toUpperCase()
+            }}</span>
+          </b>
+        </v-avatar>
+        <br />
+        <small>
+          <b class="white--text">
+            {{ user }}
+          </b>
+        </small>
+      </div>
       <!-- links -->
       <v-list class="top-2">
         <v-list-item
@@ -184,8 +184,11 @@ export default {
   margin-top: -8px !important;
 }
 .bottom {
-  top: 80px;
+  top: 75px;
   padding: 5px;
   position: absolute;
+}
+.bg-image {
+  height: 180px;
 }
 </style>

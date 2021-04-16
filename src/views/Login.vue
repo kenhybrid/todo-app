@@ -2,7 +2,7 @@
   <div>
     <Login />
 
-    <v-btn routrt block text  to="/register" class="bottom">
+    <v-btn routrt block text  to="/register" class="bottom primary--text">
       <span>Register</span>
     </v-btn>
   </div>
