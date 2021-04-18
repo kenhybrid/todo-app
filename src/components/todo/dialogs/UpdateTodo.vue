@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-card tile flat class=" transparent">
-      <v-app-bar elevation="0" color="dark">
-        <v-btn icon dark @click="() => $router.go(-1)">
-          <v-icon color="primary">mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-subheader class="center">UPDATE A TASK</v-subheader>
+    <v-app-bar elevation="0" color="dark">
+      <v-btn icon dark @click="() => $router.go(-1)">
+        <v-icon color="primary">mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-subheader class="center">UPDATE A TASK</v-subheader>
 
-        <v-spacer></v-spacer>
-      </v-app-bar>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    <v-card tile flat class="transparent">
       <v-form class="py-5 pa-4">
         <v-text-field
           label="Add a Task"
@@ -38,12 +38,8 @@
           </template>
           <v-date-picker v-model="dueDate" scrollable>
             <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="modal = false">
-              Cancel
-            </v-btn>
-            <v-btn text color="primary" @click="$refs.dialog.save(date)">
-              OK
-            </v-btn>
+            <v-btn text color="primary" @click="modal = false"> Cancel </v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(date)"> OK </v-btn>
           </v-date-picker>
         </v-dialog>
         <v-select
@@ -54,7 +50,7 @@
           outlined
         ></v-select>
         <v-btn class="primary" fab bottom right fixed dark @click="editTodo">
-          <v-icon small>mdi-content-save-outline</v-icon>
+          <v-icon>mdi-content-save-outline</v-icon>
         </v-btn>
         <!-- <v-btn block color="primary" dark @click="addTodo">Add Todo</v-btn> -->
       </v-form>
@@ -87,11 +83,7 @@ export default {
   },
   methods: {
     editTodo() {
-      if (
-        this.content != null &&
-        this.priority != null &&
-        this.dueDate != null
-      ) {
+      if (this.content != null && this.priority != null && this.dueDate != null) {
         this.$store.dispatch("updateTodo", {
           id: this.id,
           content: this.content,

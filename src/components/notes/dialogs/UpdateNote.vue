@@ -1,27 +1,19 @@
 <template>
   <div>
-    <v-card tile flat class="transparent">
-      <v-app-bar elevation="0" color="dark">
-        <v-btn icon dark @click="() => $router.go(-1)">
-          <v-icon color="primary">mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-subheader class="center">CREATE A NOTE</v-subheader>
+    <v-app-bar elevation="0" color="dark" app>
+      <v-btn icon dark @click="() => $router.go(-1)">
+        <v-icon color="primary">mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-subheader class="center">UPDATE A NOTE</v-subheader>
 
-        <v-spacer></v-spacer>
-      </v-app-bar>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    <v-card tile flat class="transparent">
       <v-form @submit.prevent class="pa-4">
         <v-text-field label="Title" outlined clearable v-model="title"></v-text-field>
         <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>
-        <v-btn
-          class="primary"
-          fab
-          bottom
-          right
-          fixed
-          dark
-          @click="updateNote"
-        >
-          <v-icon small>mdi-content-save-outline</v-icon>
+        <v-btn class="primary" fab bottom right fixed dark @click="updateNote">
+          <v-icon>mdi-content-save-outline</v-icon>
         </v-btn>
       </v-form>
     </v-card>
@@ -35,7 +27,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 export default {
-    props:["id"],
+  props: ["id"],
   components: {
     VueEditor,
   },
@@ -56,7 +48,7 @@ export default {
       ],
     };
   },
-   computed: {
+  computed: {
     getOneNote() {
       return this.$store.getters.getOneNote(this.id);
     },
@@ -68,7 +60,7 @@ export default {
           .dispatch("updateNote", {
             title: this.title,
             body: this.body,
-            id:this.id
+            id: this.id,
           })
           .then(() => {
             (this.title = ""), (this.body = "");
@@ -78,10 +70,10 @@ export default {
       }
     },
   },
-   created() {
+  created() {
     this.title = this.getOneNote.title;
     this.body = this.getOneNote.body;
-   }
+  },
 };
 </script>
 

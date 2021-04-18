@@ -19,6 +19,13 @@ const routes = [
     component: Shared,
   },
   {
+    path: "/notes",
+    name: "Notes",
+    meta: { requiresAuth: true },
+    component: Note,
+  },
+  // auth
+  {
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
@@ -28,12 +35,7 @@ const routes = [
     name: "Register",
     component: () => import("../views/Register.vue"),
   },
-  {
-    path: "/notes",
-    name: "Notes",
-    meta: { requiresAuth: true },
-    component: Note,
-  },
+//  notes
   {
     path: "/createnote",
     name: "createNote",
@@ -54,6 +56,7 @@ const routes = [
     meta: { requiresAuth: true },
     component: () => import("../components/send/Share.vue"),
   },
+  // my todos
   {
     path: "/edit/:id",
     props: true,

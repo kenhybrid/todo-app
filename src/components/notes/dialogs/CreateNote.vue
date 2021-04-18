@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card tile flat class="transparent">
-      <v-app-bar elevation="0" class="dark">
+      <v-app-bar elevation="0" class="dark" app>
         <v-btn icon dark @click="() => $router.go(-1)">
           <v-icon color="primary">mdi-arrow-left</v-icon>
         </v-btn>
@@ -12,16 +12,8 @@
       <v-form @submit.prevent class="pa-4">
         <v-text-field label="Title" outlined v-model="title"></v-text-field>
         <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>
-        <v-btn
-          class="primary"
-          fab
-          bottom
-          right
-          fixed
-          dark
-          @click="addNote"
-        >
-          <v-icon small>mdi-content-save-outline</v-icon>
+        <v-btn class="primary" fab bottom right fixed dark @click="addNote">
+          <v-icon>mdi-content-save-outline</v-icon>
         </v-btn>
       </v-form>
     </v-card>

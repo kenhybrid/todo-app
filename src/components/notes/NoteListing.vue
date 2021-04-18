@@ -6,14 +6,11 @@
         <v-list
           class="border-list"
           subheader
-          two-line
           link
           v-for="(n, index) in notes"
           :key="n.id"
         >
-         <v-divider
-          
-        ></v-divider>
+          <v-divider></v-divider>
           <v-list-item>
             <v-list-item-avatar>
               <v-avatar size="48">
@@ -49,15 +46,6 @@
                   </v-list-item>
                   <!-- view todo  end-->
 
-                  <!-- update -->
-                  <v-list-item link router :to="'/editNote/' + n.id">
-                    <v-list-item-icon>
-                      <v-icon>mdi-pencil-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>Edit</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
                   <v-list-item link :to="'/share/' + n.id">
                     <v-list-item-icon>
                       <v-icon>mdi-share-outline</v-icon>
@@ -67,7 +55,15 @@
                     </v-list-item-content>
                   </v-list-item>
                   <!-- delete todo -->
-
+                  <!-- update -->
+                  <v-list-item link router :to="'/editNote/' + n.id">
+                    <v-list-item-icon>
+                      <v-icon>mdi-pencil-outline</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Edit</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                   <DeleteNote :id="n.id" />
                   <!-- delete todo end -->
                 </v-list>
@@ -77,9 +73,7 @@
           </v-list-item>
           <!-- <v-divider></v-divider> -->
         </v-list>
-        <v-divider
-          
-        ></v-divider>
+        <v-divider></v-divider>
       </div>
       <div v-else class="notodos">
         <center>
@@ -115,11 +109,7 @@
 </template>
 
 <script>
-import {
-  formatRelative,
-  formatDistanceToNowStrict,
-  differenceInHours,
-} from "date-fns";
+import { formatRelative, formatDistanceToNowStrict, differenceInHours } from "date-fns";
 import DeleteNote from "./dialogs/DeleteNote";
 export default {
   components: {

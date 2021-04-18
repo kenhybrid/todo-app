@@ -6,20 +6,14 @@
         <v-list
           :class="'border-list ' + n.priority"
           subheader
-          two-line
           link
           v-for="n in todos"
           :key="n.id"
         >
-        <v-divider
-          
-        ></v-divider>
+          <v-divider></v-divider>
           <v-list-item>
             <v-list-item-avatar>
-              <v-checkbox
-                @click="updateStatus(n)"
-                :input-value="n.done"
-              ></v-checkbox>
+              <v-checkbox @click="updateStatus(n)" :input-value="n.done"></v-checkbox>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>{{ n.content }} .</v-list-item-title>
@@ -52,14 +46,6 @@
                   <!-- view todo  end-->
 
                   <!-- update -->
-                  <v-list-item link router :to="'/edit/' + n.id">
-                    <v-list-item-icon>
-                      <v-icon>mdi-pencil-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>Edit</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
 
                   <!-- update end -->
                   <!-- schedule todo -->
@@ -82,7 +68,14 @@
                     </v-list-item-content>
                   </v-list-item>
                   <!-- delete todo -->
-
+                  <v-list-item link router :to="'/edit/' + n.id">
+                    <v-list-item-icon>
+                      <v-icon>mdi-pencil-outline</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Edit</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                   <DeleteTodo :id="n.id" />
                   <!-- delete todo end -->
                 </v-list>
@@ -92,9 +85,7 @@
           </v-list-item>
           <!-- <v-divider></v-divider> -->
         </v-list>
-        <v-divider
-          
-        ></v-divider>
+        <v-divider></v-divider>
         <!-- <div class="mb-5 pb-5"></div> -->
       </div>
       <div v-else class="notodos">
@@ -107,7 +98,7 @@
       </div>
     </v-container>
     <v-dialog v-model="dialog" max-width="500px" transition="dialog-transition">
-      <v-card tile  :class="'pa-3 ' + todo.priority" >
+      <v-card tile :class="'pa-3 ' + todo.priority">
         <!-- :class="'pa-3 ' + todo.priority" -->
         <v-card-text>
           {{ todo.content }}
@@ -125,12 +116,8 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog
-      v-model="reminder"
-      max-width="500px"
-      transition="dialog-transition"
-    >
-      <v-card tile  :class="'pa-3 ' + todo.priority" >
+    <v-dialog v-model="reminder" max-width="500px" transition="dialog-transition">
+      <v-card tile :class="'pa-3 ' + todo.priority">
         <v-card-text>
           <center class="my-5">
             <v-icon x-large>mdi-bell-ring-outline</v-icon>
@@ -144,11 +131,7 @@
 </template>
 
 <script>
-import {
-  formatRelative,
-  formatDistanceToNowStrict,
-  differenceInHours,
-} from "date-fns";
+import { formatRelative, formatDistanceToNowStrict, differenceInHours } from "date-fns";
 import DeleteTodo from "./dialogs/DeleteTodo";
 export default {
   components: {
