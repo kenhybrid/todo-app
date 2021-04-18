@@ -3,88 +3,98 @@
     <v-container grid-list-xs class="mb-5 pb-5">
       <div v-if="todos.length > 0" class="mb-5 pb-5">
         <!-- <v-divider></v-divider> -->
-        <v-list
-          :class="'border-list ' + n.priority"
-          subheader
-          link
-          v-for="n in todos"
-          :key="n.id"
+        <draggable
+          v-model="todos"
+          :scroll-sensitivity="200"
+          :force-fallback="true"
+          :disabled="disabledrag"
         >
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-checkbox @click="updateStatus(n)" :input-value="n.done"></v-checkbox>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ n.content }} .</v-list-item-title>
-              <small
-                ><b>{{ n.createdAt | dateFilter }}</b></small
-              >
-            </v-list-item-content>
-            <v-list-item-action v-if="n.done">
-              <v-icon color="primary">mdi-check-all</v-icon>
-            </v-list-item-action>
-            <!--suplimentary action  -->
-            <v-list-item-action>
-              <!-- menu -->
-              <v-menu bottom close-on-click offset-x>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn icon large dark v-bind="attrs" v-on="on">
-                    <v-icon color="grey lighten-1">mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </template>
-                <!-- view todo -->
-                <v-list dense>
-                  <v-list-item link @click="viewTodo(n)">
-                    <v-list-item-icon>
-                      <v-icon>mdi-eye-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>View</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <!-- view todo  end-->
+          <v-list
+            :class="'border-list ' + n.priority"
+            subheader
+            link
+            v-for="n in todos"
+            :key="n.index"
+          >
+            <v-divider></v-divider>
+            <v-list-item>
+              <v-list-item-avatar>
+                <v-checkbox @click="updateStatus(n)" :input-value="n.done"></v-checkbox>
+              </v-list-item-avatar>
+              <v-list-item-content @dblclick="viewTodo(n)">
+                <v-list-item-title>{{ n.content }} .</v-list-item-title>
+                <small
+                  ><b>{{ n.createdAt | dateFilter }}</b></small
+                >
+              </v-list-item-content>
+              <v-list-item-action v-if="n.done">
+                <v-icon color="primary">mdi-check-all</v-icon>
+              </v-list-item-action>
+              <!--suplimentary action  -->
+              <v-list-item-action>
+                <v-btn icon @click="disabledrag = true" v-if="disabledrag == false">
+                  <v-icon>mdi-drag</v-icon>
+                </v-btn>
+                <!-- menu -->
+                <v-menu bottom close-on-click offset-x v-else>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon dark v-bind="attrs" v-on="on">
+                      <v-icon color="grey lighten-1">mdi-dots-vertical</v-icon>
+                    </v-btn>
+                  </template>
+                  <!-- view todo -->
+                  <v-list dense>
+                    <!-- view todo  end-->
 
-                  <!-- update -->
+                    <!-- update -->
+                    <v-list-item link router :to="'/edit/' + n.id">
+                      <v-list-item-icon>
+                        <v-icon>mdi-pencil-outline</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>Edit</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item link @click="disablesort">
+                      <v-list-item-icon>
+                        <v-icon>mdi-sort</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>Sort</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <!-- update end -->
+                    <!-- schedule todo -->
+                    <v-list-item link @click="setReminder(n)">
+                      <v-list-item-icon>
+                        <v-icon>mdi-bell-outline</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>Reminder</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
 
-                  <!-- update end -->
-                  <!-- schedule todo -->
-                  <v-list-item link @click="setReminder(n)">
-                    <v-list-item-icon>
-                      <v-icon>mdi-bell-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>Reminder</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
+                    <!-- schedule todo -->
+                    <v-list-item link :to="'/share/' + n.id">
+                      <v-list-item-icon>
+                        <v-icon>mdi-share-outline</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>Share</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <!-- delete todo -->
 
-                  <!-- schedule todo -->
-                  <v-list-item link :to="'/share/' + n.id">
-                    <v-list-item-icon>
-                      <v-icon>mdi-share-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>Share</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <!-- delete todo -->
-                  <v-list-item link router :to="'/edit/' + n.id">
-                    <v-list-item-icon>
-                      <v-icon>mdi-pencil-outline</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title>Edit</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <DeleteTodo :id="n.id" />
-                  <!-- delete todo end -->
-                </v-list>
-              </v-menu>
-              <!-- menu -->
-            </v-list-item-action>
-          </v-list-item>
-          <!-- <v-divider></v-divider> -->
-        </v-list>
+                    <DeleteTodo :id="n.id" />
+                    <!-- delete todo end -->
+                  </v-list>
+                </v-menu>
+                <!-- menu -->
+              </v-list-item-action>
+            </v-list-item>
+            <!-- <v-divider></v-divider> -->
+          </v-list>
+        </draggable>
         <v-divider></v-divider>
         <!-- <div class="mb-5 pb-5"></div> -->
       </div>
@@ -131,15 +141,19 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 import { formatRelative, formatDistanceToNowStrict, differenceInHours } from "date-fns";
 import DeleteTodo from "./dialogs/DeleteTodo";
 export default {
   components: {
     DeleteTodo,
-    // UpdateTodo,
+    draggable,
   },
   data() {
     return {
+      disabledrag: true,
+
       show: true,
       todo: {},
       closeOnClick: true,
@@ -149,11 +163,22 @@ export default {
     };
   },
   computed: {
-    todos() {
-      return this.$store.getters.getAllTodos;
+    // todos() {
+    //   return this.$store.getters.getAllTodos;
+    // },
+    todos: {
+      get() {
+        return this.$store.getters.getAllTodos;
+      },
+      set(value) {
+        this.$store.commit("updateTodo", value);
+      },
     },
   },
   methods: {
+    disablesort() {
+      this.disabledrag = false;
+    },
     viewTodo(n) {
       this.todo = n;
       this.dialog = true;

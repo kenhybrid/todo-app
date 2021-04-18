@@ -14,7 +14,7 @@
       ></v-text-field>
     </v-app-bar>
     <v-container grid-list-xs>
-      <v-list
+      <!-- <v-list
         :class="'border-list ' + n.priority"
         subheader
         link
@@ -43,7 +43,7 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
-      <v-divider></v-divider>
+      <v-divider></v-divider> -->
     </v-container>
     <v-btn fab fixed bottom right color="primary">
       <v-icon>mdi-share-outline</v-icon>

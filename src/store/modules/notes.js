@@ -79,6 +79,9 @@ const mutations = {
       });
       return (state.notes = results);
     }
+  },
+  updateList(state,payload){
+    state.notes =payload
   }
 };
 

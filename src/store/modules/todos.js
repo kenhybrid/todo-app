@@ -85,6 +85,9 @@ const mutations = {
       return (state.todos = results);
     }
   },
+  updateTodo(state,payload){
+    state.todos =payload
+  }
 };
 //actions
 const actions = {
