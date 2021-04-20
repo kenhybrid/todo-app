@@ -14,36 +14,27 @@
       ></v-text-field>
     </v-app-bar>
     <v-container grid-list-xs>
-      <!-- <v-list
-        :class="'border-list ' + n.priority"
-        subheader
-        link
-        v-for="n in 5"
-        :key="n.idex"
-      >
+      <v-list class="border-list" v-for="n in users" :key="n.id" subheader link>
         <v-divider></v-divider>
-        <v-list-item>
+        <v-list-item @click="choseUser(n)">
           <v-list-item-avatar>
-            <v-avatar size="42" color="primary" class=" ">
-              <b class="white--text headline">T</b>
+            <v-avatar size="42" color="primary" class="">
+              <b class="white--text headline text-capitalize">{{
+                n.email.slice(0, 1).toUpperCase()
+              }}</b>
             </v-avatar>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>Username</v-list-item-title>
-            <small><b>email</b></small>
+            <v-list-item-title class="text-capitalize">{{
+              n.username
+            }}</v-list-item-title>
+            <small
+              ><b>{{ n.email }}</b></small
+            >
           </v-list-item-content>
-
-          <v-list-item-action>
-            <v-checkbox
-              v-model="checked"
-              type="checkbox"
-              :value="n.index"
-              @change="selectUser"
-            ></v-checkbox>
-          </v-list-item-action>
         </v-list-item>
       </v-list>
-      <v-divider></v-divider> -->
+      <v-divider></v-divider>
     </v-container>
     <v-btn fab fixed bottom right color="primary">
       <v-icon>mdi-share-outline</v-icon>
@@ -58,10 +49,24 @@ export default {
       checked: [],
     };
   },
-  methods: {
-    selectUser() {
-      console.log(this.checked);
+  computed: {
+    users() {
+      return this.$store.getters.getUsers;
     },
+  },
+  methods: {
+    choseUser(n) {
+      console.log(n.author);
+    },
+  },
+  created() {
+    this.$store.dispatch("getAllUsers");
   },
 };
 </script>
+<style>
+.border-list {
+  margin-top: 2px;
+  /* margin-bottom: 2px; */
+}
+</style>

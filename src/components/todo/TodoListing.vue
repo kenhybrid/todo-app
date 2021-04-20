@@ -57,7 +57,7 @@
                     </v-list-item>
                     <v-list-item link @click="disablesort">
                       <v-list-item-icon>
-                        <v-icon>mdi-sort</v-icon>
+                        <v-icon>mdi-view-list-outline</v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title>Sort</v-list-item-title>
@@ -65,24 +65,24 @@
                     </v-list-item>
                     <!-- update end -->
                     <!-- schedule todo -->
-                    <v-list-item link @click="setReminder(n)">
+                    <!-- <v-list-item link @click="setReminder(n)">
                       <v-list-item-icon>
                         <v-icon>mdi-bell-outline</v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title>Reminder</v-list-item-title>
                       </v-list-item-content>
-                    </v-list-item>
+                    </v-list-item> -->
 
                     <!-- schedule todo -->
-                    <v-list-item link :to="'/share/' + n.id">
+                    <!-- <v-list-item link :to="'/share/' + n.id">
                       <v-list-item-icon>
                         <v-icon>mdi-share-outline</v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title>Share</v-list-item-title>
                       </v-list-item-content>
-                    </v-list-item>
+                    </v-list-item> -->
                     <!-- delete todo -->
 
                     <DeleteTodo :id="n.id" />

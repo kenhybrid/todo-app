@@ -4,7 +4,7 @@ import router from "../../router";
 const state = {
   // auth state
   user: {},
-
+  users: [],
   currentUser: "",
   authState: false,
   loading: false,
@@ -25,9 +25,12 @@ const getters = {
   getUser(state) {
     return state.user;
   },
-  getAuthState(state){
-    return state.authState
-  }
+  getAuthState(state) {
+    return state.authState;
+  },
+  getUsers(state) {
+    return state.users;
+  },
 };
 
 const mutations = {
@@ -44,6 +47,9 @@ const mutations = {
   },
   SET_USER(state, payload) {
     state.user = payload;
+  },
+  SET_USERS(state, payload) {
+    state.users = payload;
   },
 };
 
@@ -63,8 +69,7 @@ const actions = {
         firestore
           .collection("users")
           .add(data)
-          .then(() => {
-          })
+          .then(() => {})
           .catch(() => {
             // console.log(error);
           });
@@ -89,6 +94,25 @@ const actions = {
           icon: "mdi-alert-outline",
         });
       });
+  },
+  getAllUsers({ commit }) {
+    firestore
+      .collection("users")
+      .get()
+      .then((docs) => {
+        const users = [];
+        docs.forEach((doc) => {
+          const data = {
+            id: doc.id,
+            username: doc.data().username,
+            email: doc.data().email,
+            author: doc.data().author,
+          };
+          users.push(data);
+        });
+        commit("SET_USERS", users);
+      })
+      .catch(() => {});
   },
   userSignIn({ commit }, payload) {
     commit("SET_LOADING", true);

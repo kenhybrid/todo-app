@@ -4,7 +4,7 @@ Vue.use(VueRouter);
 import store from "../store";
 import Todo from "../views/Todo.vue";
 import Note from "../views/Notes.vue";
-import Shared from "../views/Shared.vue";
+// import Shared from "../views/Inbox.vue";
 const routes = [
   {
     path: "/",
@@ -12,12 +12,12 @@ const routes = [
     meta: { requiresAuth: true },
     component: Todo,
   },
-  {
-    path: "/shared",
-    name: "Shared",
-    meta: { requiresAuth: true },
-    component: Shared,
-  },
+  // {
+  //   path: "/inbox",
+  //   name: "Inbox",
+  //   meta: { requiresAuth: true },
+  //   component: Shared,
+  // },
   {
     path: "/notes",
     name: "Notes",

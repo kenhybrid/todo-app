@@ -16,6 +16,7 @@
           outlined
           clearable
           prepend-inner-icon="mdi-pencil-outline"
+          hint="Whats on your mind?"
         ></v-text-field>
         <v-dialog
           ref="dialog"

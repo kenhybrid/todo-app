@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card tile flat class="transparent">
+    <v-card tile flat class="transparent" style="margin-bottom: 60px">
       <v-app-bar elevation="0" class="dark" app>
         <v-btn icon dark @click="() => $router.go(-1)">
           <v-icon color="primary">mdi-arrow-left</v-icon>
@@ -10,8 +10,17 @@
         <v-spacer></v-spacer>
       </v-app-bar>
       <v-form @submit.prevent class="pa-4">
-        <v-text-field label="Title" outlined v-model="title"></v-text-field>
-        <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>
+        <v-text-field
+          label="Title"
+          hint="What do you want to write about?"
+          outlined
+          v-model="title"
+        ></v-text-field>
+        <vue-editor
+          class="mb-5 pb-5"
+          v-model="body"
+          :editorToolbar="customToolbar"
+        ></vue-editor>
         <v-btn class="primary" fab bottom right fixed dark @click="addNote">
           <v-icon>mdi-content-save-outline</v-icon>
         </v-btn>
@@ -32,7 +41,7 @@ export default {
   },
   data() {
     return {
-      body: "Body",
+      body: "",
       title: "",
       snackbar: false,
       createdAt: new Date().toISOString(),

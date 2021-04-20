@@ -19,6 +19,7 @@
               prepend-inner-icon="mdi-email-outline"
               color="grey"
               v-model="email"
+              hint="An official Gmail account is recomended."
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.min]"
@@ -31,13 +32,7 @@
             >
               ></v-text-field
             >
-            <v-btn
-              class="primary mt-5"
-              block
-              large
-              @click="register"
-              :loading="loading"
-            >
+            <v-btn class="primary mt-5" block large @click="register" :loading="loading">
               <span left class="white--text">register</span>
               <v-icon small right color="white">mdi-lock-outline</v-icon>
             </v-btn>
@@ -54,7 +49,7 @@ export default {
     return {
       show: false,
       email: "",
-      username:"",
+      username: "",
       password: "",
       rules: {
         required: (value) => !!value || "Required.",
@@ -63,7 +58,7 @@ export default {
       },
     };
   },
-   computed: {
+  computed: {
     loading() {
       return this.$store.getters.getLoading;
     },

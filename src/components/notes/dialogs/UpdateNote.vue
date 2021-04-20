@@ -8,7 +8,7 @@
 
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-card tile flat class="transparent">
+    <v-card tile flat class="transparent" style="margin-bottom: 60px">
       <v-form @submit.prevent class="pa-4">
         <v-text-field label="Title" outlined clearable v-model="title"></v-text-field>
         <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>

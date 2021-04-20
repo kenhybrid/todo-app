@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-app-bar
-      v-if="$route.name == 'Todo' || $route.name == 'Notes'  || $route.name == 'Shared'"
+      v-if="$route.name == 'Todo' || $route.name == 'Notes' || $route.name == 'Inbox'"
       app
       elevation-0
       dark
@@ -18,10 +18,7 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon
-        v-if="!search"
-        @click="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="!search" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         <Time v-if="!search" />
       </v-app-bar-title>
@@ -58,7 +55,7 @@
       <div v-if="!search">
         <v-tooltip v-if="!$vuetify.theme.dark" bottom>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on"  icon @click="darkMode">
+            <v-btn v-on="on" icon @click="darkMode">
               <v-icon class="mr-1" color="black">mdi-moon-waxing-crescent</v-icon>
             </v-btn>
           </template>
@@ -67,7 +64,7 @@
 
         <v-tooltip v-else bottom>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on"  icon @click="darkMode">
+            <v-btn v-on="on" icon @click="darkMode">
               <v-icon color="white">mdi-white-balance-sunny</v-icon>
             </v-btn>
           </template>
@@ -86,8 +83,8 @@
     <v-navigation-drawer app v-model="drawer" color="dark">
       <v-img src="../../assets/pattern.png" class="bg-image"> </v-img>
 
-      <div class="bottom ">
-        <v-avatar size="56" color="primary" class=" ma-1">
+      <div class="bottom">
+        <v-avatar size="56" color="primary" class="ma-1">
           <b>
             <span class="white--text headline">{{
               user.email.slice(0, 1).toUpperCase()
@@ -96,10 +93,12 @@
         </v-avatar>
         <v-list subheader>
           <v-list-item-content>
-            <v-list-item-title class=" white--text text-capitalize ml-3"> {{ user.username }}</v-list-item-title>
-              <small class="white--text ml-3">
-                {{ user.email }}
-              </small>
+            <v-list-item-title class="white--text text-capitalize ml-3">
+              {{ user.username }}</v-list-item-title
+            >
+            <small class="white--text ml-3">
+              {{ user.email }}
+            </small>
           </v-list-item-content>
         </v-list>
       </div>
@@ -149,7 +148,7 @@ export default {
       links: [
         { name: "Todos", link: "/", icon: "mdi-format-list-checks" },
         { name: "Notes", link: "/notes", icon: "mdi-book-outline" },
-        { name: "Shared", link: "/shared", icon: "mdi-share-outline" },
+        // { name: "Inbox", link: "/inbox", icon: "mdi-email-open-outline" },
       ],
     };
   },
