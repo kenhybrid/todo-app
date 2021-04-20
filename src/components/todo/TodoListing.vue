@@ -22,7 +22,7 @@
                 <v-checkbox @click="updateStatus(n)" :input-value="n.done"></v-checkbox>
               </v-list-item-avatar>
               <v-list-item-content @dblclick="viewTodo(n)">
-                <v-list-item-title>{{ n.content }} .</v-list-item-title>
+                <v-list-item-title>{{ n.content }} </v-list-item-title>
                 <small
                   ><b>{{ n.createdAt | dateFilter }}</b></small
                 >
