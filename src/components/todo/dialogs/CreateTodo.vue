@@ -15,6 +15,7 @@
           v-model="content"
           outlined
           clearable
+          autocomplete="off"
           prepend-inner-icon="mdi-pencil-outline"
           hint="What do you want to do?"
         ></v-text-field>

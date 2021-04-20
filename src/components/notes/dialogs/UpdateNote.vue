@@ -10,7 +10,13 @@
     </v-app-bar>
     <v-card tile flat class="transparent" style="margin-bottom: 60px">
       <v-form @submit.prevent class="pa-4">
-        <v-text-field label="Title" outlined clearable v-model="title"></v-text-field>
+        <v-text-field
+          label="Title"
+          autocomplete="off"
+          outlined
+          clearable
+          v-model="title"
+        ></v-text-field>
         <vue-editor v-model="body" :editorToolbar="customToolbar"></vue-editor>
         <v-btn class="primary" fab bottom right fixed dark @click="updateNote">
           <v-icon>mdi-content-save-outline</v-icon>

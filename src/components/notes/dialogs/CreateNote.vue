@@ -13,6 +13,7 @@
         <v-text-field
           label="Title"
           hint="What do you want to write about?"
+          autocomplete="off"
           outlined
           v-model="title"
         ></v-text-field>

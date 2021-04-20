@@ -14,6 +14,7 @@
           label="Add a Task"
           v-model="content"
           outlined
+          autocomplete="off"
           clearable
           prepend-inner-icon="mdi-pencil-outline"
           hint="Whats on your mind?"
